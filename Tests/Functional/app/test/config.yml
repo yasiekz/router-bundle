@@ -1,0 +1,9 @@
+imports:
+    - { resource: ../../../../Resources/config/services.yml }
+
+framework:
+    fragments: ~
+    router:
+        resource: "%kernel.root_dir%/test/routing.yml"
+    secret:        test
+

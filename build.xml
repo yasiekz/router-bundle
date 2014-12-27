@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Yasiekz Router Bundle" default="build">
+
+    <!-- Import ant-contrib (for, list, etc) -->
+    <!-- sudo apt-get install ant-contrib -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="/usr/share/java/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+
+    <!-- Properties -->
+
+    <property name="codedir" value="${basedir}/"/>
+
+    <!-- Macros -->
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="${basedir}/bin/phpunit" failonerror="true">
+            <arg value="-c"/>
+            <arg path="${basedir}/"/>
+        </exec>
+    </target>
+
+    <target name="phpunit-local">
+        <echo>phpunit for local (without logs)</echo>
+        <exec executable="${basedir}/bin/phpunit" failonerror="true">
+            <arg value="-c"/>
+            <arg path="${basedir}/phpunit-local.xml"/>
+        </exec>
+    </target>
+
+</project>
