@@ -1,10 +1,15 @@
 # README
 
+[![Build Status](https://travis-ci.org/yasiekz/router-bundle.svg)](https://travis-ci.org/yasiekz/router-bundle)
+[![Latest Stable Version](https://poser.pugx.org/yasiekz/router-bundle/v/stable.svg)](https://packagist.org/packages/yasiekz/router-bundle) 
+[![Total Downloads](https://poser.pugx.org/yasiekz/router-bundle/downloads.svg)](https://packagist.org/packages/yasiekz/router-bundle) 
+[![Latest Unstable Version](https://poser.pugx.org/yasiekz/router-bundle/v/unstable.svg)](https://packagist.org/packages/yasiekz/router-bundle) [![License](https://poser.pugx.org/yasiekz/router-bundle/license.svg)](https://packagist.org/packages/yasiekz/router-bundle)
+
 Bundle that provides aviability of generating URL address to objects instead of giving route name and route parameters
 
 ## Instalation
 
-Add bundle in poiurewqw AppKernel.php
+Add bundle in your AppKernel.php
 
 ```
 $bundles = array(
@@ -20,8 +25,8 @@ There is no additional configuration required.
 
 ## What interface should I use?
 
-We have two interfaces aviable. The RoutableCmsInterface is useful when you want to have more than one routing per object for example in CMS systems,
-where you might want to have diffrent routing for edit, delete object. The Routable FrontInterface is useful for websites when there is only
+We have two interfaces avaiable. The RoutableCmsInterface is useful when you want to have more than one routing per object for example in CMS systems,
+where you might want to have diffrent routing for edit, delete object. The RoutableFrontInterface is useful for websites when there is only
 only one routing per object, but one object might have many routes depends on for example category that object belongs.
 
 ## Usage:
@@ -29,7 +34,7 @@ only one routing per object, but one object might have many routes depends on fo
 ### RoutableCmsInterface
 
 ```
-use Yasiekz\RouterBundle\Service\RoutableCmsInterface
+use Yasiekz\RouterBundle\Service\RoutableCmsInterface;
 
 class YourClass implements RoutableCmsIterface
 {
@@ -52,7 +57,7 @@ class YourClass implements RoutableCmsIterface
 }
 ```
 
-The URL is generated as same as default in symfony2.
+The URL is generated as same as default in Symfony2.
 
 From controller:
 
@@ -74,7 +79,7 @@ From twig:
 Usage
 
 ```
-use Yasiekz\RouterBundle\Service\RoutableFrontInterface
+use Yasiekz\RouterBundle\Service\RoutableFrontInterface;
 
 class YourClass implements RoutableFrontIterface
 {
