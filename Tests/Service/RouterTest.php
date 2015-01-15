@@ -7,6 +7,7 @@ use Yasiekz\RouterBundle\Service\Router;
 use Yasiekz\RouterBundle\Tests\Functional\Model\RouterBadTestClass;
 use Yasiekz\RouterBundle\Tests\Functional\Model\RouterCmsTestClass;
 use Yasiekz\RouterBundle\Tests\Functional\Model\RouterFrontTestClass;
+use Yasiekz\RouterBundle\Tests\Functional\Model\RouterMultiFrontTestClass;
 
 /**
  * Class RouterTest
@@ -61,6 +62,18 @@ class RouterTest extends KernelTestCase
         return [
             [new RouterCmsTestClass(1), 'edit', true, 'http://localhost/test,1'],
             [new RouterCmsTestClass(2), 'delete', false, '/test-cms,2'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function multiFrontProvider()
+    {
+        return [
+            [new RouterMultiFrontTestClass(1), ['destination' => 'article'], true, 'http://localhost/test-multi-front/1'], // test without any params with an empty array
+            [new RouterMultiFrontTestClass(2), ['destination' => 'article', 'param1' => 'value1'], true, 'http://localhost/test-multi-front/2,value1'], // test without any params with an empty array
+            [new RouterMultiFrontTestClass(3), ['param1' => 'value1', 'param2' => 'value2'], false, '/test-front/3,value1,value2'], // test with additional params
         ];
     }
 

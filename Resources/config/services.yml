@@ -2,6 +2,7 @@ parameters:
     yasiekz_router.router.class: Yasiekz\RouterBundle\Service\Router
     yasiekz_router.strategy.cms.class: Yasiekz\RouterBundle\Strategy\CmsStrategy
     yasiekz_router.strategy.front.class: Yasiekz\RouterBundle\Strategy\FrontStrategy
+    yasiekz_router.strategy.multi_front.class: Yasiekz\RouterBundle\Strategy\MultiFrontStrategy
 
 services:
     yasiekz_router.router.default:
@@ -19,3 +20,6 @@ services:
 
     yasiekz_router.router.strategy.front:
         class: %yasiekz_router.strategy.front.class%
+
+    yasiekz_router.router.strategy.multi_front:
+        class: %yasiekz_router.strategy.multi_front.class%

@@ -17,7 +17,7 @@ $bundles = array(
             )
 ```
 
-Bundel z automatu nadpisuje domyślny routing symfony 2.
+Bundle z automatu nadpisuje domyślny routing symfony 2.
 
 ## Dodatkowa konfiguracja
 
@@ -27,6 +27,7 @@ Nie jest wymagana żadna dodatkowa konfiguracja
 
 Mamy do dyspozycji dwa interfejsy. RoutableCmsInterface jest uzyteczny dla wszelkiego rodzaju systemów CMS, gdzie do każdego obiektu można dodać kilka routingów np do edycji, czy usuwania.
 RoutableFrontInterface jest użyteczny dla serwisów www, gdzie do każdego obiektu potrzebny jest tylko jeden routing, ale zależy on od różnych czynników np. artykuł może mieć różny routing w zależności od kategorii do której należy.
+RoutableMultiFrontInterface jest takim combo pomiedzy nimi.
 
 ## Przykłady zastosowania:
 
@@ -121,9 +122,58 @@ Z poziomu twiga:
 {{ path(object, { 'param1': value1, 'param2': value2 }) }}
 ```
 
+### RoutableMultiFrontInterface
+
+Zastosowanie
+
+```
+use Yasiekz\RouterBundle\Service\RoutableMultiFrontInterface;
+
+class YourClass implements RoutableMultiFrontInterface
+{
+    const DESTINATION_ARTICLE = 'article';
+
+    public function getRouteName($parameters = array(), $destination = null)
+    {
+        // metoda powinna nazwe routingu dla obiektu danej klasy i parametrow $parameters i $destination
+        if ($destination == self::DESTINATION_ARTICLE) {
+            return 'yourclass_detail';
+        }
+        return 'yourclass_default';
+    }
+
+    public function getRouterParameters($routeName, $destination = null);
+    {
+        // metoda powinna zwrocic parametry niezbedne do stworzenia routingu w zaleznosci od podanego parametry $destination np:
+
+        return array(
+            'id' => $this->getId()
+        );
+    }
+}
+```
+
+The URL is generated as same as default in symfony2.
+
+From controller:
+
+```
+$object = new YourClass();
+$parameters = array('destination' => 'article'); // here might be additional params which be marged to routing
+$url = $this->generateUrl($object, $parameters);
+```
+
+Powyzszy przyklad wygeneruje posredni adres dla obiektu z przekazaniem parametru 'destination' do routera. Parametr ten zostanie zmergowany razem z tymi ktore router otrzyma z metody getRouterParameters() z Twojej klasy.
+
+Z poziomu Twiga:
+
+```
+{{ path(object, { 'destination': 'article', 'param1': value1, 'param2': value2 }) }}
+```
+
 ## Ważne
 
-Nie ma możliwości, aby obiekt implementował oba interfejsy jednocześnie. Zostanie wybrany routing dla RoutableCmsInterface.
+Nie ma możliwości, aby obiekt implementował wszystkie interfejsy jednocześnie. Zostanie wybrany routing dla RoutableCmsInterface.
 
 ## Contrubution
 

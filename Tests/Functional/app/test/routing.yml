@@ -7,3 +7,7 @@ cms_test_delete:
 cms_front_test:
     path: /test-front/{id},{param1},{param2}
     defaults: { param1: null, param2: null }
+
+cms_multi-front_test:
+    path: /test-multi-front/{id},{param1},{param2}
+    defaults: { param1: null, param2: null }
