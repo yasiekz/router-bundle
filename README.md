@@ -27,7 +27,7 @@ There is no additional configuration required.
 
 We have two interfaces avaiable. The RoutableCmsInterface is useful when you want to have more than one routing per object for example in CMS systems,
 where you might want to have diffrent routing for edit, delete object. The RoutableFrontInterface is useful for websites when there is only
-only one routing per object, but one object might have many routes depends on for example category that object belongs.
+only one routing per object, but one object might have many routes depends on for example category that object belongs. TheRoutableMultiFrontStrategy is combo of both interfaces.
 
 ## Usage:
 
@@ -119,9 +119,58 @@ From Twig:
 {{ path(object, { 'param1': value1, 'param2': value2 }) }}
 ```
 
+### RoutableMultiFrontInterface
+
+Usage
+
+```
+use Yasiekz\RouterBundle\Service\RoutableMultiFrontInterface;
+
+class YourClass implements RoutableMultiFrontInterface
+{
+    const DESTINATION_ARTICLE = 'article';
+
+    public function getRouteName($parameters = array(), $destination = null)
+    {
+        // method should return routeName for given object and parameters or destination
+        if ($destination == self::DESTINATION_ARTICLE) {
+            return 'yourclass_detail';
+        }
+        return 'yourclass_default';
+    }
+
+    public function getRouterParameters($routeName, $destination = null);
+    {
+        // method should return parameters that is necessary to create routing depend on $routeName parameter:
+
+        return array(
+            'id' => $this->getId()
+        );
+    }
+}
+```
+
+The URL is generated as same as default in symfony2.
+
+From controller:
+
+```
+$object = new YourClass();
+$parameters = array('destination' => 'article'); // here might be additional params which be marged to routing
+$url = $this->generateUrl($object, $parameters);
+```
+
+The example above generates indirect address to object $object with transmission destination param, and merge this param with getRouterParameters() method from class YourClass
+
+From Twig:
+
+```
+{{ path(object, { 'destination': 'article', 'param1': value1, 'param2': value2 }) }}
+```
+
 ## Important
 
-There is no possibility that the one class implements both of RoutableFrontInterface and RoutableCmsIterface.
+There is no possibility that the one class implements all interfaces at the same time.
 
 ## Contrubution
 

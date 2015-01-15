@@ -59,6 +59,10 @@ class Router extends BaseRouter
                 break;
             case $routeName instanceof RoutableFrontInterface:
                 $strategy = $this->getFrontStrategyService();
+                break;
+            case $routeName instanceof RoutableMultiFrontInterface:
+                $strategy = $this->getMultiFrontStrategyService();
+                break;
         }
 
         if ($strategy instanceof StrategyInterface) {
@@ -86,6 +90,11 @@ class Router extends BaseRouter
     private function getFrontStrategyService()
     {
         return $this->container->get('yasiekz_router.router.strategy.front');
+    }
+
+    private function getMultiFrontStrategyService()
+    {
+        return $this->container->get('yasiekz_router.router.strategy.multi_front');
     }
 
 }
