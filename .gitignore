@@ -10,10 +10,6 @@
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 
-# Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
-
 # Managed by Composer
 /app/bootstrap.php.cache
 /var/bootstrap.php.cache
@@ -37,3 +33,5 @@
 .idea
 Tests/Functional/app/tmp
 Tests/Functional/app/tmp/*
+
+composer.lock
