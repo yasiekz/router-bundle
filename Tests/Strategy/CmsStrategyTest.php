@@ -7,7 +7,7 @@ use Yasiekz\RouterBundle\Tests\Functional\Model\RouterCmsTestClass;
 /**
  * Class CmsStrategyTest
  */
-class CmsStrategyTest extends \Symfony\Bundle\FrameworkBundle\Test\KernelTestCase
+class CmsStrategyTest extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 {
     /**
      * @var CmsStrategy;
