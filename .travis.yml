@@ -16,9 +16,13 @@ matrix:
         - php: hhvm-nightly
 
 before_script:
+  - gem install yaml-lint
   - composer require "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update
   - composer require "symfony/finder:${SYMFONY_VERSION}" --no-update
   - composer update
   - bin/parallel-lint -e php,phpt --exclude vendor .
 
-script: bin/phpunit --testdox
+script: 
+  - yaml-lint Resources/config/*.yml
+  - bin/phpunit --testdox
+  
