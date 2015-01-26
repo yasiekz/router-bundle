@@ -83,7 +83,7 @@ class RouterTest extends WebTestCase
      */
     protected function setUp()
     {
-        self::bootKernel();
+        self::createClient();
         $this->router = static::$kernel->getContainer()->get('router');
 
         parent::setUp();
