@@ -3,6 +3,7 @@
 namespace Yasiekz\RouterBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Yasiekz\RouterBundle\Service\Router;
 use Yasiekz\RouterBundle\Tests\Functional\Model\RouterBadTestClass;
 use Yasiekz\RouterBundle\Tests\Functional\Model\RouterCmsTestClass;
@@ -13,7 +14,7 @@ use Yasiekz\RouterBundle\Tests\Functional\Model\RouterMultiFrontTestClass;
  * Class RouterTest
  * @package Yasiekz\RouterBundle\Tests\Service
  */
-class RouterTest extends KernelTestCase
+class RouterTest extends WebTestCase
 {
     /**
      * @var Router
@@ -82,7 +83,7 @@ class RouterTest extends KernelTestCase
      */
     protected function setUp()
     {
-        self::bootKernel();
+        self::createClient();
         $this->router = static::$kernel->getContainer()->get('router');
 
         parent::setUp();
